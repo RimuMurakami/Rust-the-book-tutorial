@@ -1,27 +1,44 @@
-// fn main() {
-//     let mut s = String::from("hello");
-//     change(&mut s);
-// }
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
 
-// fn change(some_string: &mut String) {
-//     some_string.push_str(", world");
-// }
-
-// fn main() {
-//     let mut s = String::from("hello");
-
-//     let r1 = &s;
-//     let r2 = &s;
-
-//     println!("{}, {}", r1, r2);
-// }
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    &s[..]
+}
 
 fn main() {
-    let reference_to_nothing = dangle();
+    let my_string = String::from("hello world");
+    let word = first_word(&my_string[..]);
+    println!("the first word is: {}", word);
+
+    let my_string_literal = "hello world";
+
+    let word = first_word(&my_string_literal[..]);
+    println!("the first word is: {}", word);
+
+    let word = first_word(my_string_literal);
+    println!("the first word is: {}", word);
+
+    // s.clear();
+    // println!("{}", s);
+
+    let a = [1, 2, 3, 4, 5];
+    let slice = &a[1..3];
+    // for element in &slice {
+    //     println!("{}", element);
+    // }
 }
 
-fn dangle() -> String {
-    let s = String::from("hello");
+// fn first_word(s: &String) -> usize {
+//     let bytes = s.as_bytes();
 
-    s
-}
+//     for (i, &item) in bytes.iter().enumerate() {
+//         if item == b' ' {
+//             return i;
+//         }
+//     }
+//     s.len()
+// }

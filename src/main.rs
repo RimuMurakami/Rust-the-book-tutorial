@@ -1,44 +1,51 @@
 fn main() {
-    let some_number = Some(5);
-    let some_string = Some("a String");
-
-    let absent_number: Option<i32> = None;
-
-    println!("{:?}, {:?}, {:?}", some_number, some_string, absent_number);
+    let coin = Coin::Quarter(UsState::Alabama);
+    value_in_cents(coin);
 
     // #[derive(Debug)]
-    // enum Message {
-    //     Quit,
-    //     Move { x: i32, y: i32 },
-    //     Write(String),
-    //     ChangeColor(i32, i32, i32),
-    // }
+    fn plus_one(x: Option<i32>) -> Option<i32> {
+        match x {
+            None => None,
+            Some(i) => Some(i + 1),
+        }
+    }
 
-    // impl Message {
-    //     fn call(&self) {
-    //         // method body would be defined here
-    //         // メソッド本体はここに定義される
+    // fn plus_one_err(x: Option<i32>) -> Option<i32> {
+    //     match x {
+    //         Some(i) => Some(i + 1),
     //     }
     // }
 
-    // let m = Message::Write(String::from("hello"));
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
 
-    // println!("{:#?}", m::Write);
+    println!("{:?}, {:?}", six, none);
+}
 
-    // #[derive(Debug)]
-    // enum IpAddr {
-    //     V4(u8, u8, u8, u8),
-    //     V6(String),
-    // }
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+}
 
-    // let home = IpAddr::V4(127, 0, 0, 1);
-    // println!("{:#?}", home);
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
 
-    // enum IpAddrKind {
-    //     V4,
-    //     V6,
-    // }
-
-    // let four = IpAddrKind::V4;
-    // let six = IpAddrKind::V6;
+fn value_in_cents(coin: Coin) -> u32 {
+    match coin {
+        Coin::Penny => {
+            println!("Lucky penny!");
+            1
+        }
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}", state);
+            25
+        }
+    }
 }

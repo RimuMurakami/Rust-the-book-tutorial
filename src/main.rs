@@ -1,44 +1,39 @@
-fn first_word(s: &str) -> &str {
-    let bytes = s.as_bytes();
-
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
-    }
-    &s[..]
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
 }
+
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
 
 fn main() {
-    let my_string = String::from("hello world");
-    let word = first_word(&my_string[..]);
-    println!("the first word is: {}", word);
+    let mut user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("some_username123"),
+        active: true,
+        sign_in_count: 1,
+    };
 
-    let my_string_literal = "hello world";
+    user1.email = String::from("another_email@example.com");
 
-    let word = first_word(&my_string_literal[..]);
-    println!("the first word is: {}", word);
+    let user2 = User {
+        email: String::from("another@example.com"),
+        username: String::from("another_username567"),
+        ..user1
+    };
 
-    let word = first_word(my_string_literal);
-    println!("the first word is: {}", word);
+    println!("{}", user2.username);
 
-    // s.clear();
-    // println!("{}", s);
-
-    let a = [1, 2, 3, 4, 5];
-    let slice = &a[1..3];
-    // for element in &slice {
-    //     println!("{}", element);
-    // }
+    let black = Color(0, 0, 0);
 }
 
-// fn first_word(s: &String) -> usize {
-//     let bytes = s.as_bytes();
-
-//     for (i, &item) in bytes.iter().enumerate() {
-//         if item == b' ' {
-//             return i;
-//         }
-//     }
-//     s.len()
-// }
+fn build_user(email: String, username: String) -> User {
+    User {
+        email,
+        username,
+        active: true,
+        sign_in_count: 1,
+    }
+}

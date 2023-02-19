@@ -1,37 +1,38 @@
 fn main() {
-    // let v: Vec<i32> = Vec::new();
-    // let mut v = vec![1, 2, 3];
+    // let mut s = String::new();
+    let mut s = String::from("foo");
+    s.push_str("bar");
+    println!("{s}");
 
-    let mut v = Vec::new();
-    v.push(1);
-    v.push(2);
-    v.push(3);
-    v.push(4);
-    v.push(5);
-    v.push(6);
-    v.push(7);
+    let mut s1 = String::from("foo");
+    let s2 = "bar";
+    s1.push_str(s2);
+    println!("s2 is {s2}");
 
-    let third = &v[2];
-    println!("The third element is {third}");
+    let s1 = String::from("tic");
+    let s2 = String::from("tac");
+    let s3 = String::from("toe");
 
-    match v.get(4) {
-        Some(num) => println!("is {num}."),
-        None => println!("is no."),
+    // let s = s1 + &s2 + &s3;
+    // println!("{s}, {s2}{s3}");
+
+    // let s = format!("{}-{}-{}", s1, s2, s3);
+    let s = format!("{s1}-{s2}-{s3}");
+    println!("{s}");
+
+    // let s1 = "Hello.";
+    // let H = s1[0];
+
+    let hello = "Здравствуйте";
+    let s = &hello[0..4];
+    println!("{s}");
+
+    for c in hello.chars() {
+        println!("{}", c);
     }
 
-    // let does_not_exist = &v[100];
-    let does_not_exist = v.get(100);
-    println!("{:?}", does_not_exist);
-
-    let v = vec![100, 32, 45];
-    for i in &v {
-        println!("{i}");
+    println!("---");
+    for c in hello.bytes() {
+        println!("{c}");
     }
-
-    let mut v = vec![32, 43, 54];
-    for i in &mut v {
-        *i += 100;
-        println!("{i}");
-    }
-    println!("{:?}", v);
 }
